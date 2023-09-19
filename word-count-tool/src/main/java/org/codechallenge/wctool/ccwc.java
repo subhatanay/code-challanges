@@ -33,7 +33,7 @@ public class ccwc {
             argsv[1] = null;
         }
         if (args.length == 1) {
-            if (args[0].equals("-c") || args[0].equals("-m") || args[0].equals("-l") || args[0].equals("-w")) {
+            if (CountOptionEnum.getOptions().contains(args[0])) {
                 argsv[0] = args[0];
                 argsv[1] = null;
             } else {
@@ -41,7 +41,7 @@ public class ccwc {
                 argsv[1] = args[0];
             }
         } else if (args.length == 2) {
-            if (args[0].equals("-c") || args[0].equals("-m") || args[0].equals("-l") || args[0].equals("-w")) {
+            if (CountOptionEnum.getOptions().contains(args[0])) {
                 argsv[0] = args[0];
             } else {
                 argsv[0] = null;
