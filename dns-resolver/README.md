@@ -10,7 +10,10 @@ alias dnsrv='java -jar target/dns-resolver-1.0-SNAPSHOT.jar'
 
 ### Execute
 ```
-dnsrv github.com 
+==> dnsrv github.com 
+
+Querying (8.8.8.8) for domain => github.com .... 
+
 QR :: (0 - Request), (1 - Response) : 1
 Opcode :: 0
 Authoritative Answer :: 0
