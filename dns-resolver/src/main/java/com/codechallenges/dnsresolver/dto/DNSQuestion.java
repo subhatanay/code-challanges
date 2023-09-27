@@ -1,8 +1,8 @@
-package com.codechanllenges.dnsresolver.dto;
+package com.codechallenges.dnsresolver.dto;
 
-import com.codechanllenges.dnsresolver.ByteUtils;
+import com.codechallenges.dnsresolver.ByteUtils;
+import com.codechallenges.dnsresolver.DNSUtils;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class DNSQuestion implements ByteString {
     private short questionClass;
 
     public DNSQuestion(ByteBuffer buffer) throws IOException {
-        questionName = ByteUtils.readDomainName(buffer);
+        questionName = DNSUtils.readDomainName(buffer);
         questionType = buffer.getShort();
         questionClass = buffer.getShort();
     }

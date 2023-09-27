@@ -1,4 +1,4 @@
-package com.codechanllenges.dnsresolver;
+package com.codechallenges.dnsresolver;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,26 +28,6 @@ public class ByteUtils {
            str += (char) buff.get();
        }
        return str;
-   }
-
-   public static String readDomainName(ByteBuffer buffer) throws IOException {
-        int value = Byte.toUnsignedInt(buffer.get());
-        if (value == 0) {
-            return "";
-        }
-
-        if (isCompressedByte(value)) {
-            buffer.position(buffer.position()-1);
-            int addr = getPointerIfCompressedByte(buffer);
-            int paddr = buffer.position();
-            buffer.position(addr);
-            String str =  readDomainName(buffer);
-            buffer.position(paddr);
-            return str;
-        } else {
-            return readString(buffer, value) + "." + readDomainName(buffer);
-        }
-
    }
 
    public static boolean isCompressedByte(int val) {

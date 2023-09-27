@@ -1,6 +1,6 @@
-package com.codechanllenges.dnsresolver.dto;
+package com.codechallenges.dnsresolver.dto;
 
-import com.codechanllenges.dnsresolver.ByteUtils;
+import com.codechallenges.dnsresolver.ByteUtils;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -28,9 +28,9 @@ public class DNSMessage implements ByteString {
 
 
 
-    public static DNSMessage  buildDNSMessage(String domain) {
+    public static DNSMessage  buildDNSMessage(String domain , boolean recursive) {
         return DNSMessage.builder()
-                .dnsHeader(DNSHeader.buildHeader())
+                .dnsHeader(recursive ? DNSHeader.buildHeaderWithRecursion() : DNSHeader.buildHeaderWithoutRecursion())
                 .questions(Arrays.asList(DNSQuestion.buildQuestion(domain)))
                 .build();
     }
@@ -73,15 +73,12 @@ public class DNSMessage implements ByteString {
     }
 
     public String toString() {
-        return "Question :: \n\t" + questions.get(0).getQuestionName() + "\n\n" +
+        return "Question Flags :: \n" + dnsHeader.getFlags() + "\n\n" +
+                "Question :: \n\t" + questions.get(0).getQuestionName() + "\n\n" +
                 "Answer ::  \n\t" +  answers.stream().map(DNSAddressRecord::getRdData).reduce((in, fun) -> in + "\n\t" + fun ).orElse("") + "\n\n" +
                 "Authorities :: \n\t" +  authorities.stream().map(DNSAddressRecord::getRdData).reduce((in, fun) -> in + "\n\t" + fun ).orElse("") + "\n\n" +
                 "Additionals :: \n\t" +  additionals.stream().map(DNSAddressRecord::getRdData).reduce((in, fun) -> in + "\n\t" + fun ).orElse("") + "\n\n";
     }
-
-
-
-
 
 
     @Override

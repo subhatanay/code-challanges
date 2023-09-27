@@ -1,4 +1,4 @@
-package com.codechanllenges.dnsresolver.dto;
+package com.codechallenges.dnsresolver.dto;
 
 import java.util.stream.IntStream;
 
